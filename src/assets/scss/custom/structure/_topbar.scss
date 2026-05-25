@@ -187,7 +187,8 @@
 
 body[data-topbar="dark"] {
     #page-topbar {
-        background-color: var(--#{$prefix}header-dark-bg);
+        // background-color: var(--#{$prefix}header-dark-bg);
+        background-color: #a5a5a5 !important;
     }
 
     .navbar-header {

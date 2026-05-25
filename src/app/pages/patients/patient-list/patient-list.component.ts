@@ -20,8 +20,11 @@ export class PatientListComponent implements OnInit {
   itemsPerPage: number = 50;
   patientList: any[] = [];
   selectedRange = [];
-  startDate: Date;
-  endDate: Date | null;
+  todayDate = new Date();
+  startDate: Date | null = null;
+  endDate: Date | null = null;
+
+  rowClasses = ['', 'table-primary', 'table-secondary', 'table-success', 'table-danger', 'table-warning', 'table-info', 'table-light', 'table-dark', ''];
 
   constructor(
     private router: Router,
@@ -97,11 +100,11 @@ export class PatientListComponent implements OnInit {
   onstartDateChange(event: any) {
     this.startDate = event;
     this.endDate = null;
-    this.getPatientData();
+    // this.getPatientData();
   }
   onendDateChange(event: any) {
     this.endDate = event;
-    this.getPatientData();
+    // this.getPatientData();
   }
 
   getFormattedDate(date: Date) {
@@ -110,5 +113,15 @@ export class PatientListComponent implements OnInit {
       dateStr = date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? ('0' + date.getMonth()+1) : date.getMonth()+1) + '-' + (date.getDate() < 10 ? ('0' + date.getDate()) : date.getDate());
     }
     return dateStr;
+  }
+
+  resetFilters() {
+    this.startDate = null;
+    this.endDate = null;
+    this.getPatientData();
+  }
+
+  search() {
+    this.getPatientData();
   }
 }

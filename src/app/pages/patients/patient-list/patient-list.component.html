@@ -4,16 +4,20 @@
         <div class="col-xs-12 col-12 col-md-3 form-group mb-3">
             <label for="startDate">Select Start Date</label>
             <input type="text" id="startDate" placeholder="Select Start Date" class="form-control" bsDatepicker
-                [bsConfig]="{ isAnimated: true, showWeekNumbers: false }" (bsValueChange)="onstartDateChange($event)"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', isAnimated: false, showWeekNumbers: false }" (bsValueChange)="onstartDateChange($event)"
                 [bsValue]="startDate" autocomplete="off" readonly (keydown)="$event.preventDefault()"
-                (paste)="$event.preventDefault()">
+                (paste)="$event.preventDefault()" [maxDate]="todayDate">
         </div>
         <div class="col-xs-12 col-12 col-md-3 form-group mb-3">
             <label for="endDate">Select End Date</label>
             <input type="text" id="endDate" placeholder="Select End Date" class="form-control" bsDatepicker
-                [bsConfig]="{ isAnimated: true, showWeekNumbers: false }" (bsValueChange)="onendDateChange($event)"
+                [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY', isAnimated: false, showWeekNumbers: false }" (bsValueChange)="onendDateChange($event)"
                 [bsValue]="endDate" autocomplete="off" readonly (keydown)="$event.preventDefault()"
-                (paste)="$event.preventDefault()" [minDate]="startDate">
+                (paste)="$event.preventDefault()" [minDate]="startDate" [maxDate]="todayDate">
+        </div>
+        <div class="col-xs-12 col-12 col-md-6 form-group mb-3 d-flex align-items-center justify-content-end">
+            <button class="btn btn-sm btn-danger mt-4" (click)="resetFilters()">Reset</button>
+            <button class="btn btn-sm btn-secondary mt-4 mx-2 btn-theme" (click)="search()">Submit</button>
         </div>
     </div>
     <div class="row">
@@ -22,7 +26,7 @@
                 <div class="card-body">
                     <div class="row m-2">
                         <div class="col-xs-12 col-12 d-flex justify-content-end">
-                            <button class="btn btn-info btn-sm btn-theme" (click)="getPatientData(true)" *ngIf="startDate && endDate">
+                            <button class="btn btn-info btn-sm btn-theme" (click)="getPatientData(true)" *ngIf="startDate && endDate && patientList.length > 0">
                                 Download
                             </button>
                         </div>
@@ -61,7 +65,7 @@
                                         <h6 *ngIf="startDate && endDate">{{isLoading ? 'Please wait while loading' : 'No data found'}}</h6>
                                     </td>
                                 </tr>
-                                <tr *ngFor="let patient of patientList; let i=index">
+                                <tr *ngFor="let patient of patientList; let i=index" [ngClass]="rowClasses[i % rowClasses.length]">
                                     <td>{{patient.corporateName}}</td>
                                     <td>{{patient.registrationNo}}</td>
                                     <td>{{patient.regId}}</td>
