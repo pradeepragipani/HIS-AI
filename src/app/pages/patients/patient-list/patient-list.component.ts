@@ -21,7 +21,7 @@ export class PatientListComponent implements OnInit {
   patientList: any[] = [];
   selectedRange = [];
   startDate: Date;
-  endDate: Date;
+  endDate: Date | null;
 
   constructor(
     private router: Router,
@@ -29,7 +29,7 @@ export class PatientListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.breadCrumbItems = [{ label: 'Patients' }, { label: 'List', active: true }];
+    this.breadCrumbItems = [{ label: 'Patient Reports' }, { label: 'List', active: true }];
   }
 
   getPatientData(download?: boolean) {
@@ -92,6 +92,15 @@ export class PatientListComponent implements OnInit {
   onValueChange(event: any) {
     this.startDate = event[0];
     this.endDate = event[1];
+    this.getPatientData();
+  }
+  onstartDateChange(event: any) {
+    this.startDate = event;
+    this.endDate = null;
+    this.getPatientData();
+  }
+  onendDateChange(event: any) {
+    this.endDate = event;
     this.getPatientData();
   }
 

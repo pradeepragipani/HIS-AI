@@ -64,7 +64,13 @@ export class AuthenticationService {
      */
     logout() {
         // logout the user
-        getFirebaseBackend().logout();
+        // getFirebaseBackend().logout();
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = '/auth/login';
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
     }
 }
 

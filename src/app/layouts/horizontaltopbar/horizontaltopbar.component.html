@@ -17,6 +17,9 @@
                 @if(hasItems(item)){
                 <i class="bx {{item.icon}} me-2"></i>{{ item.label | translate }} <div class="arrow-down"></div>
                 }
+                @else{
+                <i class="bx {{item.icon}} me-1"></i>{{ item.label | translate }}
+                }
               </a>
               }
               @if(hasItems(item)){

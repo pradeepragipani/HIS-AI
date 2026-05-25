@@ -78,7 +78,7 @@ export class LoginComponent implements OnInit {
     ).subscribe({
       next: (data) => {
         this.isLoading = false;
-        if (data?.code == 0) {
+        if (data?.token) {
           this.store.dispatch(login({ email: emailOrContact, password: password }));
           // this.store.dispatch(storeAuthUserData({ user: data.response[0] }));
           // let userData = data.response[0];

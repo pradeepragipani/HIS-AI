@@ -1,10 +1,19 @@
 <div class="container-fluid">
-    <app-page-title title="Patients" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <app-page-title title="Patient Reports"></app-page-title>
     <div class="row">
-        <div class="col-xs-12 col-12 col-md-4 form-group mb-3">
-            <input type="text" placeholder="Select Date" class="form-control" bsDaterangepicker
-                [bsConfig]="{ isAnimated: true, maxDateRange: 5, showWeekNumbers: false }" [readonly]="true"
-                (bsValueChange)="onValueChange($event)" [(ngModel)]="selectedRange">
+        <div class="col-xs-12 col-12 col-md-3 form-group mb-3">
+            <label for="startDate">Select Start Date</label>
+            <input type="text" id="startDate" placeholder="Select Start Date" class="form-control" bsDatepicker
+                [bsConfig]="{ isAnimated: true, showWeekNumbers: false }" (bsValueChange)="onstartDateChange($event)"
+                [bsValue]="startDate" autocomplete="off" readonly (keydown)="$event.preventDefault()"
+                (paste)="$event.preventDefault()">
+        </div>
+        <div class="col-xs-12 col-12 col-md-3 form-group mb-3">
+            <label for="endDate">Select End Date</label>
+            <input type="text" id="endDate" placeholder="Select End Date" class="form-control" bsDatepicker
+                [bsConfig]="{ isAnimated: true, showWeekNumbers: false }" (bsValueChange)="onendDateChange($event)"
+                [bsValue]="endDate" autocomplete="off" readonly (keydown)="$event.preventDefault()"
+                (paste)="$event.preventDefault()" [minDate]="startDate">
         </div>
     </div>
     <div class="row">
@@ -13,18 +22,18 @@
                 <div class="card-body">
                     <div class="row m-2">
                         <div class="col-xs-12 col-12 d-flex justify-content-end">
-                            <button class="btn btn-info btn-sm" (click)="getPatientData(true)" *ngIf="selectedRange?.length > 0">
+                            <button class="btn btn-info btn-sm btn-theme" (click)="getPatientData(true)" *ngIf="startDate && endDate">
                                 Download
                             </button>
                         </div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table mb-0">
+                    <div class="table-wrapper">
+                        <table class="custom-table">
 
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Corporate Name</th>
-                                    <th>Registration No
+                                    <th>Registration No</th>
                                     <th>Reg ID</th>
                                     <th>Patient Name</th>
                                     <th>Encounter ID</th>
@@ -46,10 +55,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngIf="patientList.length < 1">
-                                    <td colspan="6">
-                                        <h6 *ngIf="selectedRange?.length == 0">Select filters..</h6>
-                                        <h6 *ngIf="selectedRange?.length != 0">{{isLoading ? 'Please wait while loading' : 'No data found'}}</h6>
+                                <tr *ngIf="patientList.length < 1 && !isLoading">
+                                    <td colspan="20">
+                                        <h6 *ngIf="!startDate || !endDate">Select dates..</h6>
+                                        <h6 *ngIf="startDate && endDate">{{isLoading ? 'Please wait while loading' : 'No data found'}}</h6>
                                     </td>
                                 </tr>
                                 <tr *ngFor="let patient of patientList; let i=index">
@@ -76,8 +85,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="loader-div" *ngIf="isLoading">
+                            <span class="loader" ></span>
+                        </div>
                     </div>
-                    <div class="row m-2">
+                    <div class="row m-2" *ngIf="patientList.length > 0">
                         <div class="col-xs-12 col-12 d-flex justify-content-end">
                             <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" [itemsPerPage]="itemsPerPage"
                                 (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

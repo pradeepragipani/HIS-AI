@@ -91,6 +91,17 @@
         "JOBS": "Jobs"
       }
     },
+    "REPORTS": {
+      "TEXT": "Reports",
+      "BADGE": "05",
+      "LIST": {
+        "DEFAULT": "Default",
+        "SAAS": "Saas",
+        "CRYPTO": "Crypto",
+        "BLOG": "Blog",
+        "JOBS": "Jobs"
+      }
+    },
     "LAYOUTS": {
       "TEXT": "Layouts",
       "LIST": {

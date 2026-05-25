@@ -166,3 +166,119 @@ dropzone>.dropzone.dz-wrapper {
 .ngx-slider .ngx-slider-tick.ngx-slider-selected {
   background-color: #556ee6 !important;
 }
+
+.btn-theme {
+  background-color: rgb(0 81 77) !important;
+  border-color: rgb(0 81 77) !important;
+  color: #fff !important;
+}
+
+.page-link.active, .active > .page-link {
+  background-color: rgb(0 81 77) !important;
+}
+
+.table-wrapper {
+  width: 100%;
+  max-height: 500px;
+
+  overflow: auto;
+
+  border-radius: 12px;
+  border: 1px solid #dcdcdc;
+
+  /* Smooth scrolling */
+  scroll-behavior: smooth;
+}
+
+/* Table */
+.custom-table {
+  width: 1200px; /* force horizontal scroll */
+  border-collapse: collapse;
+}
+
+.custom-table th,
+.custom-table td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+
+/* Sticky header */
+.custom-table thead th {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 2;
+}
+
+/* ========================= */
+/* CUSTOM SCROLLBAR */
+/* ========================= */
+
+/* Chrome, Edge, Safari */
+.table-wrapper::-webkit-scrollbar {
+  width: 10px;   /* vertical */
+  height: 10px;  /* horizontal */
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 20px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+  border: 2px solid #f1f1f1;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Firefox */
+.table-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+.loader {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  position: relative;
+  background: rgb(0 81 77 / 51%);
+}
+.loader:before , .loader:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgb(0 81 77);
+  animation: slide 1s infinite linear alternate;
+  opacity: 0.5;
+}
+.loader:after {
+  animation: slide2 1s infinite linear alternate;
+  opacity: 1;
+
+}
+@keyframes slide {
+  0% , 20% {  transform: translate(0, 0)  }
+  80% , 100% { transform: translate(15px, 15px) }
+}
+@keyframes slide2 {
+  0% , 20% {  transform: translate(0, 0) }
+  80% , 100% { transform: translate(-15px, -15px) }
+}
