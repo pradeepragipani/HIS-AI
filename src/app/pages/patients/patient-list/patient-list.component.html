@@ -93,7 +93,7 @@
                             <span class="loader" ></span>
                         </div>
                     </div>
-                    <div class="row m-2" *ngIf="patientList.length > 0">
+                    <div class="row pagination-row" *ngIf="patientList.length > 0">
                         <div class="col-xs-12 col-12 d-flex justify-content-end">
                             <pagination [boundaryLinks]="true" [totalItems]="totalItems" [(ngModel)]="currentPage" [itemsPerPage]="itemsPerPage"
                                 (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;"

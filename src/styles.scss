@@ -282,3 +282,19 @@ dropzone>.dropzone.dz-wrapper {
   0% , 20% {  transform: translate(0, 0) }
   80% , 100% { transform: translate(-15px, -15px) }
 }
+
+
+// pagination
+.pagination-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.pagination-row pagination {
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
